@@ -38,9 +38,7 @@ $(document).ready(function () {
     if ($(".menu-hero-content").length) {
 
         setTimeout(function () {
-
             $(".menu-hero-content").addClass("show");
-
         }, 150);
 
     }
@@ -80,9 +78,7 @@ $(document).ready(function () {
                 let card = $(this);
 
                 setTimeout(function () {
-
                     card.addClass("show");
-
                 }, index * 150);
 
             }
@@ -91,10 +87,10 @@ $(document).ready(function () {
 
     }
 
+
     if ($(".feature-card").length) {
 
         showFeatureCards();
-
         $(window).on("scroll", showFeatureCards);
 
     }
@@ -113,9 +109,7 @@ $(document).ready(function () {
         if ($(target).length) {
 
             $("html, body").animate({
-
                 scrollTop: $(target).offset().top - 70
-
             }, 700);
 
         }
@@ -177,32 +171,25 @@ $(document).ready(function () {
 
 
         const titleObserver = new IntersectionObserver(
-
             function (entries) {
 
                 entries.forEach(function (entry) {
 
                     if (entry.isIntersecting) {
-
                         $(entry.target).addClass("show");
-
                     }
 
                 });
 
             },
-
             {
                 threshold: 0.2
             }
-
         );
 
 
         $(".menu-title-animation").each(function () {
-
             titleObserver.observe(this);
-
         });
 
 
@@ -211,7 +198,6 @@ $(document).ready(function () {
         ================================= */
 
         const menuObserver = new IntersectionObserver(
-
             function (entries) {
 
                 entries.forEach(function (entry) {
@@ -226,9 +212,7 @@ $(document).ready(function () {
                         let delay = (index % 3) * 120;
 
                         setTimeout(function () {
-
                             card.addClass("reveal");
-
                         }, delay);
 
                     }
@@ -236,100 +220,89 @@ $(document).ready(function () {
                 });
 
             },
-
             {
                 threshold: 0.15,
                 rootMargin: "0px 0px -50px 0px"
             }
-
         );
 
 
         $(".menu-card, .extra-card, .drink-card").each(function () {
-
             menuObserver.observe(this);
-
         });
 
     }
 
+
     /* =================================
-   DOKUMENTASI & KONTAK HERO
-================================= */
+       INFORMASI / KONTAK HERO
+    ================================= */
 
-if ($(".page-hero-content").length) {
+    if ($(".page-hero-content").length) {
 
-    setTimeout(function () {
-        $(".page-hero-content").addClass("show");
-    }, 150);
+        setTimeout(function () {
+            $(".page-hero-content").addClass("show");
+        }, 150);
 
-}
+    }
 
 
-/* =================================
-   DOKUMENTASI
-================================= */
+    /* =================================
+       DOKUMENTASI
+    ================================= */
 
-if ($(".documentation-card").length) {
+    if ($(".documentation-card").length) {
 
-    const documentationObserver =
-        new IntersectionObserver(function (entries) {
+        const documentationObserver =
+            new IntersectionObserver(function (entries) {
 
-            entries.forEach(function (entry) {
+                entries.forEach(function (entry) {
 
-                if (entry.isIntersecting) {
+                    if (entry.isIntersecting) {
+                        $(entry.target).addClass("show");
+                    }
 
-                    $(entry.target).addClass("show");
+                });
 
-                }
-
+            }, {
+                threshold: 0.15
             });
 
-        }, {
-            threshold: 0.15
+
+        $(".documentation-card").each(function () {
+            documentationObserver.observe(this);
         });
 
-
-    $(".documentation-card").each(function () {
-
-        documentationObserver.observe(this);
-
-    });
-
-}
+    }
 
 
-/* =================================
-   KONTAK
-================================= */
+    /* =================================
+       KONTAK
+    ================================= */
 
-if ($(".contact-card, .contact-form").length) {
+    if ($(".contact-card, .contact-form").length) {
 
-    const contactObserver =
-        new IntersectionObserver(function (entries) {
+        const contactObserver =
+            new IntersectionObserver(function (entries) {
 
-            entries.forEach(function (entry) {
+                entries.forEach(function (entry) {
 
-                if (entry.isIntersecting) {
+                    if (entry.isIntersecting) {
+                        $(entry.target).addClass("show");
+                    }
 
-                    $(entry.target).addClass("show");
+                });
 
-                }
-
+            }, {
+                threshold: 0.15
             });
 
-        }, {
-            threshold: 0.15
+
+        $(".contact-card, .contact-form").each(function () {
+            contactObserver.observe(this);
         });
 
-
-    $(".contact-card, .contact-form").each(function () {
-
-        contactObserver.observe(this);
-
-    });
-
-}
+    }
 
 
     /* =================================
@@ -339,193 +312,240 @@ if ($(".contact-card, .contact-form").length) {
     $(window).resize(function () {
 
         if ($(window).width() >= 768) {
-
             $("#mobileMenu").hide();
-
         }
 
     });
 
 });
 
+
 /* =================================
-   PESAN VIA WHATSAPP
+   PESANAN
 ================================= */
 
 $(document).ready(function () {
 
     let keranjang = [];
 
-    const nomorWA = "6281217267385";
+    let siapKirim = false;
 
 
-    /* ==============================
-       TAMBAHKAN TOMBOL PESAN
-    ============================== */
-
-    $(".menu-card").each(function () {
-
-        let card = $(this);
-
-        let nama = card.find("h3").text().trim();
-        let harga = card.find("p").text().trim();
-
-        card.find(".p-6").append(`
-            <button
-                class="order-button mt-4 w-full
-                       bg-orange-500 text-black
-                       py-3 rounded-xl
-                       font-black
-                       hover:bg-orange-400
-                       hover:-translate-y-1
-                       transition"
-                data-name="${nama}"
-                data-price="${harga}">
-                
-                🛒 Pesan
-
-            </button>
-        `);
-
-    });
-
-
-    /* ==============================
-       TAMBAHAN
-    ============================== */
+    /* =================================
+       TOMBOL PESAN TAMBAHAN
+    ================================= */
 
     $("#menuList section").each(function () {
 
-        $(this).find(".grid > div").each(function () {
+        let section = $(this);
 
-            let card = $(this);
-
-            let nama = card.find("h3").text().trim();
-            let harga = card.find("p").text().trim();
-
-            if (nama && harga) {
-
-                card.append(`
-                    <button
-                        class="order-button mt-4 w-full
-                               bg-orange-500 text-black
-                               py-2 rounded-lg
-                               font-black
-                               hover:bg-orange-400
-                               transition"
-                        data-name="${nama}"
-                        data-price="${harga}">
-
-                        🛒 Pesan
-
-                    </button>
-                `);
-
-            }
-
-        });
-
-    });
+        let judul =
+            section.find("h2").first().text().trim();
 
 
-    /* ==============================
-       MINUMAN
-    ============================== */
+        if (judul === "Tambahan") {
 
-    $(".grid.lg\\:grid-cols-2 .flex").each(function () {
+            section.find(".grid > div").each(function () {
 
-        let item = $(this);
+                let card = $(this);
 
-        let nama = item.find("span").text().trim();
-        let harga = item.find("strong").text().trim();
+                let nama =
+                    card.find("h3").first().text().trim();
 
-        if (nama && harga) {
+                let harga =
+                    card.find("p").first().text().trim();
 
-            item.append(`
-                <button
-                    class="order-button ml-3
-                           bg-orange-500 text-black
-                           px-3 py-1 rounded-lg
-                           font-bold text-sm
-                           hover:bg-orange-400
-                           transition"
-                    data-name="${nama}"
-                    data-price="${harga}">
 
-                    🛒
+                if (
+                    nama &&
+                    harga &&
+                    card.find(".order-button").length === 0
+                ) {
 
-                </button>
-            `);
+                    card.append(`
+
+                        <button
+                            type="button"
+                            class="order-button mt-4 w-full
+                                   bg-orange-500 text-black
+                                   py-2 rounded-lg
+                                   font-black
+                                   hover:bg-orange-400
+                                   transition"
+                            data-name="${nama}"
+                            data-price="${harga}">
+
+                            🛒 Pesan
+
+                        </button>
+
+                    `);
+
+                }
+
+            });
 
         }
 
     });
 
 
-    /* ==============================
-       KLIK PESAN
-    ============================== */
+    /* =================================
+       TOMBOL PESAN MINUMAN
+    ================================= */
+
+    $("#menuList section").each(function () {
+
+        let section = $(this);
+
+        let judul =
+            section.find("h2").first().text().trim();
+
+
+        if (judul.includes("Minuman")) {
+
+            section
+                .find(".flex.justify-between")
+                .each(function () {
+
+                    let item = $(this);
+
+                    let nama =
+                        item.find("span").first().text().trim();
+
+                    let harga =
+                        item.find("strong").first().text().trim();
+
+
+                    if (
+                        nama &&
+                        harga &&
+                        item.find(".order-button").length === 0
+                    ) {
+
+                        item.append(`
+
+                            <button
+                                type="button"
+                                class="order-button
+                                       ml-3 shrink-0
+                                       bg-orange-500 text-black
+                                       px-3 py-1 rounded-lg
+                                       font-black text-sm
+                                       hover:bg-orange-400
+                                       transition"
+                                data-name="${nama}"
+                                data-price="${harga}">
+
+                                🛒 Pesan
+
+                            </button>
+
+                        `);
+
+                    }
+
+                });
+
+        }
+
+    });
+
+
+    /* =================================
+       TOMBOL PESAN
+    ================================= */
 
     $(document).on("click", ".order-button", function () {
 
-        let nama = $(this).data("name");
-        let harga = $(this).data("price");
+        let nama =
+            $(this).data("name");
+
+        let harga =
+            $(this).data("price");
+
 
         let jumlah = prompt(
             "Mau pesan berapa " + nama + "?",
             "1"
         );
 
-        if (!jumlah || jumlah <= 0) {
+
+        if (
+            !jumlah ||
+            isNaN(jumlah) ||
+            jumlah <= 0
+        ) {
+
             return;
+
         }
 
+
         keranjang.push({
+
             nama: nama,
+
             harga: harga,
+
             jumlah: parseInt(jumlah)
+
         });
+
 
         updateKeranjang();
 
     });
 
 
-    /* ==============================
+    /* =================================
        TAMPILKAN KERANJANG
-    ============================== */
+    ================================= */
 
     function updateKeranjang() {
 
         let daftar = "";
 
+
         keranjang.forEach(function (item, index) {
 
             daftar += `
+
                 <div class="flex justify-between
                             items-center
                             border-b border-zinc-800
                             py-3">
 
                     <div>
+
                         <p class="font-bold">
+
                             ${item.nama}
+
                         </p>
+
 
                         <p class="text-orange-500">
+
                             ${item.jumlah} × ${item.harga}
+
                         </p>
+
                     </div>
 
+
                     <button
+                        type="button"
                         onclick="hapusPesanan(${index})"
-                        class="text-red-500 font-bold">
+                        class="text-red-500 font-bold
+                               hover:text-red-400">
 
                         ✕
 
                     </button>
 
                 </div>
+
             `;
 
         });
@@ -533,14 +553,55 @@ $(document).ready(function () {
 
         $("#orderList").html(daftar);
 
+
+        /* =================================
+           TOMBOL TAMBAH PESANAN
+        ================================= */
+
+        if ($("#addMoreOrder").length === 0) {
+
+            $("#orderForm").before(`
+
+                <button
+                    type="button"
+                    id="addMoreOrder"
+                    class="w-full mt-5
+                           border border-orange-500
+                           text-orange-500
+                           py-3 rounded-xl
+                           font-black
+                           hover:bg-orange-500
+                           hover:text-black
+                           transition">
+
+                    ➕ Tambah Pesanan
+
+                </button>
+
+            `);
+
+        }
+
+
         $("#orderModal").removeClass("hidden");
 
     }
 
 
-    /* ==============================
+    /* =================================
+       TAMBAH PESANAN LAGI
+    ================================= */
+
+    $(document).on("click", "#addMoreOrder", function () {
+
+        $("#orderModal").addClass("hidden");
+
+    });
+
+
+    /* =================================
        HAPUS PESANAN
-    ============================== */
+    ================================= */
 
     window.hapusPesanan = function (index) {
 
@@ -551,9 +612,9 @@ $(document).ready(function () {
     };
 
 
-    /* ==============================
+    /* =================================
        TUTUP MODAL
-    ============================== */
+    ================================= */
 
     $(document).on("click", "#closeOrder", function () {
 
@@ -562,23 +623,43 @@ $(document).ready(function () {
     });
 
 
-    /* ==============================
-       KIRIM KE WHATSAPP
-    ============================== */
+    /* =================================
+       KIRIM FORM KE PHP
+    ================================= */
 
-    $(document).on("click", "#sendWhatsApp", function () {
+    $(document).on("submit", "#orderForm", function (e) {
+
+        /* =================================
+           JIKA SUDAH DIKONFIRMASI
+        ================================= */
+
+        if (siapKirim) {
+            return;
+        }
+
+
+        e.preventDefault();
+
+
+        /* =================================
+           CEK KERANJANG
+        ================================= */
 
         if (keranjang.length === 0) {
 
-            alert("Belum ada menu yang dipilih.");
+            alert("Silakan pilih menu terlebih dahulu.");
 
             return;
 
         }
 
 
-        let namaPelanggan = $("#customerName").val().trim();
-        let catatan = $("#customerNote").val().trim();
+        /* =================================
+           CEK NAMA
+        ================================= */
+
+        let namaPelanggan =
+            $("#customerName").val().trim();
 
 
         if (!namaPelanggan) {
@@ -590,48 +671,367 @@ $(document).ready(function () {
         }
 
 
-        let pesan = "Halo Mas Gondrong, saya mau pesan.%0A%0A";
+        /* =================================
+           AMBIL CATATAN
+        ================================= */
 
-        pesan += "Nama: " + namaPelanggan + "%0A%0A";
+        let catatan =
+            $("#customerNote").val().trim();
 
-        pesan += "Pesanan:%0A";
+
+        /* =================================
+           SUSUN PESANAN
+        ================================= */
+
+        let daftarPesanan = "";
 
 
         keranjang.forEach(function (item, index) {
 
-            pesan +=
+            daftarPesanan +=
+
                 (index + 1) +
                 ". " +
                 item.nama +
                 " × " +
                 item.jumlah +
-                "%0A";
+                " - " +
+                item.harga +
+                "\n";
 
         });
 
 
-        if (catatan) {
+        /* =================================
+           SIMPAN KE INPUT HIDDEN
+        ================================= */
 
-            pesan +=
-                "%0ACatatan:%0A" +
-                catatan +
-                "%0A";
+        $("#orderData").val(daftarPesanan);
+
+
+        /* =================================
+           BUAT MODAL KONFIRMASI
+        ================================= */
+
+        if ($("#confirmOrderModal").length === 0) {
+
+            $("body").append(`
+
+                <div id="confirmOrderModal"
+                     class="hidden fixed inset-0 z-[200]
+                            bg-black/80
+                            flex items-center justify-center
+                            px-4">
+
+                    <div class="w-full max-w-lg
+                                bg-zinc-950
+                                border border-orange-500
+                                rounded-2xl
+                                p-6
+                                shadow-2xl">
+
+                        <!-- HEADER -->
+
+                        <div class="flex justify-between
+                                    items-center">
+
+                            <h2 class="text-2xl
+                                       font-black
+                                       text-orange-500">
+
+                                🧾 Konfirmasi Pesanan
+
+                            </h2>
+
+                        </div>
+
+
+                        <!-- NAMA -->
+
+                        <div class="mt-5">
+
+                            <p class="text-sm
+                                      text-zinc-400
+                                      font-bold">
+
+                                Nama
+
+                            </p>
+
+
+                            <p id="confirmName"
+                               class="mt-1
+                                      font-bold
+                                      text-white">
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- PESANAN -->
+
+                        <div class="mt-5">
+
+                            <p class="text-sm
+                                      text-zinc-400
+                                      font-bold">
+
+                                Pesanan
+
+                            </p>
+
+
+                            <div id="confirmList"
+                                 class="mt-2
+                                        max-h-48
+                                        overflow-y-auto
+                                        border
+                                        border-zinc-800
+                                        rounded-xl
+                                        p-3">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CATATAN -->
+
+                        <div class="mt-5">
+
+                            <p class="text-sm
+                                      text-zinc-400
+                                      font-bold">
+
+                                Catatan
+
+                            </p>
+
+
+                            <p id="confirmNote"
+                               class="mt-1
+                                      text-white">
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- TOMBOL -->
+
+                        <div class="grid
+                                    grid-cols-2
+                                    gap-3
+                                    mt-6">
+
+                            <button
+                                type="button"
+                                id="backToOrder"
+                                class="border
+                                       border-zinc-700
+                                       text-white
+                                       py-3
+                                       rounded-xl
+                                       font-black
+                                       hover:bg-zinc-800
+                                       transition">
+
+                                ← Kembali
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="continueWhatsApp"
+                                class="bg-orange-500
+                                       text-black
+                                       py-3
+                                       rounded-xl
+                                       font-black
+                                       hover:bg-orange-400
+                                       transition">
+
+                                📱 Lanjut ke WhatsApp
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `);
 
         }
 
 
-        pesan += "%0ATerima kasih.";
+        /* =================================
+           ISI DATA KONFIRMASI
+        ================================= */
+
+        $("#confirmName")
+            .text(namaPelanggan);
 
 
-        let url =
-            "https://wa.me/" +
-            nomorWA +
-            "?text=" +
-            pesan;
+        let daftarKonfirmasi = "";
 
 
-        window.open(url, "_blank");
+        keranjang.forEach(function (item, index) {
+
+            daftarKonfirmasi += `
+
+                <div class="py-3
+                            border-b
+                            border-zinc-800">
+
+                    <p class="font-bold">
+
+                        ${index + 1}.
+                        ${item.nama}
+
+                    </p>
+
+
+                    <p class="text-orange-500">
+
+                        ${item.jumlah}
+                        ×
+                        ${item.harga}
+
+                    </p>
+
+                </div>
+
+            `;
+
+        });
+
+
+        $("#confirmList")
+            .html(daftarKonfirmasi);
+
+
+        $("#confirmNote")
+            .text(
+                catatan || "Tidak ada catatan."
+            );
+
+
+        /* =================================
+           TUTUP MODAL PESANAN
+        ================================= */
+
+        $("#orderModal")
+            .addClass("hidden");
+
+
+        /* =================================
+           TAMPILKAN KONFIRMASI
+        ================================= */
+
+        $("#confirmOrderModal")
+            .removeClass("hidden");
 
     });
+
+
+    /* =================================
+       KEMBALI KE PESANAN
+    ================================= */
+
+    $(document).on(
+        "click",
+        "#backToOrder",
+        function () {
+
+            $("#confirmOrderModal")
+                .addClass("hidden");
+
+
+            $("#orderModal")
+                .removeClass("hidden");
+
+        }
+    );
+
+
+    /* =================================
+       LANJUT KE WHATSAPP
+    ================================= */
+
+    $(document).on(
+        "click",
+        "#continueWhatsApp",
+        function () {
+
+            /* =================================
+               TANDAI SUDAH DIKONFIRMASI
+            ================================= */
+
+            siapKirim = true;
+
+
+            /* =================================
+               SUSUN ULANG PESANAN
+            ================================= */
+
+            let daftarPesanan = "";
+
+
+            keranjang.forEach(function (item, index) {
+
+                daftarPesanan +=
+
+                    (index + 1) +
+                    ". " +
+                    item.nama +
+                    " × " +
+                    item.jumlah +
+                    " - " +
+                    item.harga +
+                    "\n";
+
+            });
+
+
+            /* =================================
+               MASUKKAN KE INPUT HIDDEN
+            ================================= */
+
+            $("#orderData")
+                .val(daftarPesanan);
+
+
+            /* =================================
+               PASTIKAN VIA WHATSAPP
+            ================================= */
+
+            if ($("input[name='via']").length === 0) {
+
+                $("#orderForm").append(`
+
+                    <input
+                        type="hidden"
+                        name="via"
+                        value="whatsapp">
+
+                `);
+
+            }
+
+
+            /* =================================
+               KIRIM KE PHP
+            ================================= */
+
+            document
+                .getElementById("orderForm")
+                .submit();
+
+        }
+    );
 
 });
